@@ -90,6 +90,8 @@ public class L1_Array {
             } // Append them
         } catch (Exception e) {
             //Ignore Index Out of Bound Exception and go on
+            output.deleteCharAt(output.length() - 1);
+            // If one min is at the end of the output, then remove it
         }
         
 

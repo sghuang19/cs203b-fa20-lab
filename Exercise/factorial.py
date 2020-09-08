@@ -7,4 +7,4 @@ while f < 100*365*24*60*60*1000000:
     i = i+1
     pass
 
-print (i-2)
+print(i-2)

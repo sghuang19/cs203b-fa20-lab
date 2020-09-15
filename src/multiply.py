@@ -60,10 +60,6 @@ def generate(dim_g):
     pass
 
 
-def multiply(matrix1, matrix2):
-    pass
-
-
 generate(3)
 matrices = read(read_dim())
 print(np.multiply(matrices[0], matrices[1]))

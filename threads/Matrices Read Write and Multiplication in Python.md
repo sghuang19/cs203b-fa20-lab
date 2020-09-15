@@ -1,4 +1,6 @@
-# Matrices Read Write and Multiplication in Python
+# Lots to Solve, Less to Write—Matrices Read Write and Multiplication in Python
+
+Matrix multiplication you're familiar with, now presented in Python.
 
 In lab 2, this question is also one for checking attendance. However, sadly, since I have an interview so I left the class early, and also because I'm not so familiar with **Python**, I didn't make it to accomplish my code during class time. But now it's the time for sharing my clumsy work.
 
@@ -10,7 +12,7 @@ A friend of mine (a skilled Python developer) told me that my Python code has a 
 
 ## Code
 
-The source code can be retrieved at
+The complete source code can be retrieved at [multiply.py](https://github.com/SamuelHuang2019/DSAA-learning/blob/master/lab/multiply.py).
 
 Several methods are defined to achieve the goal.
 
@@ -109,7 +111,7 @@ After searching online, in conclusion, the best way dealing with matrix, or any 
 
 ---
 
-### Output
+### Calling the functions
 
 ```Python
 generate(3)
@@ -118,6 +120,14 @@ print(np.multiply(matrices[0], matrices[1]))
 ```
 
 Since I already utilized `numpy`, `numpy.multiply()` is available to obtain the product of two matrices directly. Obviously this is a shortcut, and the problem doesn't want me to do so...
+
+---
+
+## Output
+
+![Output](https://gitee.com/SamuelHuang2019/figure-bed/raw/master/img/20200915201434-multiplication.png)
+
+Running `multiply.py`, in terminal, Python outputs elements in the two matrices generated, then the result.
 
 ---
 

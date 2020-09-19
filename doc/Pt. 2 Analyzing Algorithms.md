@@ -16,6 +16,11 @@ A[i + 1] = key
 ```
 
 >A **loop invariant** can be used to prove the correctness of an algorithm
+>Loop invariant is a specific **property** or **condition** that is always satisfied in the loop. Using loop invariant to prove the correctness of an algorithm is similar to **proof by induction**.
+>For detailed explanation, see blogs below:
+>
+>- [循环不变量(Loop invariant) by dazhi316](https://blog.csdn.net/dazhi316/article/details/6004080)
+>- [循环不变式 by Wu Yudong](https://www.cnblogs.com/wuyudong/p/loop-invariant.html)
 
 For detailed explanation on insertion sort algorithm, see links below.
 
@@ -154,8 +159,8 @@ To sort `A[p ... r]`:
 ```
 MERGE-SORT(A, p, r)
     if p < r
-        q = ⌊(p + r)/2⌋          // check for base case
-        MERGE-SORT(A, p, q)     // divide
+        q = ⌊(p + r)/2⌋          // divide
+        MERGE-SORT(A, p, q)     // conquer
         MERGE-SORT(A, q+1, r)   // conquer
         MERGE(A, p, q, r)       // combine
 ```
@@ -199,3 +204,77 @@ MERGE(A, p, q, r)
 >Put on the bottom of each input pile a special **sentinel** card, it contains a special value to **simplify the code**. We use ∞, since that’s guaranteed to “lose” to any other value.
 >
 >The only way that ∞ cannot lose is when both piles have ∞ exposed as their top cards. But when that happens, all the non-sentinel cards have already been placed into the output pile.
+
+- The first two `for` loops take $\Theta(n_1 + n_2) = \Theta(n)$ time.
+- The last `for` loop makes $n$ iterations, each take constant time for $\Theta(n)$ time.
+- Total time: $\Theta(n)$
+
+### Recurrence
+
+**Recurrence equation** (or **recurrence**) can be used to describe the running time of a divide-and-conquer algorithm.
+
+Let $T(n)$ be the running time on a problem of size $n$.
+
+- If the problem size is **small enough** we have a base case.
+- Otherwise, suppose we **divide** into sub-problems, each $1/b$ times the size of the original problem.
+- Let the time to **divide** a size $n$ problem be $D(n)$.
+- There are sub-problems to solve, each of size $n/b$.
+- **Each sub-problem** takes $T(n/b)$ time to solve.
+- We spend $aT(n/b)$ time **solving sub-problems**
+- Let the time to **combine** solutions be $C(n)$
+
+The recurrence is
+
+$$
+T(n) =
+\begin{cases}
+& \Theta(1) & \text{if } n\le c\\
+& aT(n/b) + D(n) + C(n) & \text{otherwise}
+\end{cases}
+$$
+
+### Total Run Time of Merge Sort
+
+>For simplicity, assume each $n$ is a power of $2$
+
+- Base case occurs when $n = 1$.
+
+For $n\ge2$
+
+- Divide
+Compute $q$ as the average of $p$ and $r$, takes $D(n) = \Theta(1)$.
+- Conquer
+Recursively solve 2 sub-problems each of size $n/2$, takes $2T(n/2)$
+- Merge
+Merge an $n$ element sub-array that takes $\Theta(n)$ time, takes $C(n) = \Theta(n)$
+
+Therefore the recurrence is
+
+$$
+T(n) =
+\begin{cases}
+& \Theta(1) & \text{if } n = 1\\
+& 2T(n/2) + \Theta(n) & \text{if } n > 1
+\end{cases}
+$$
+
+>By the **Master Theorem**, we can find the solution directly.
+>Master Theorem will be covered in future chapters.
+
+$$
+T(n) = \Theta(n\lg n).
+$$
+
+Let $c$ be a constant that describes the running time for the base case and also is the time per array element for the divide and conquer steps.
+
+![Running time of divide and conquer algorithm](https://gitee.com/SamuelHuang2019/figure-bed/raw/master/img/20200919174858-divide-conquer.png)
+
+Each time we go down one level, **the number of sub-problems doubles** but **the cost per subproblem halves** so cost per level stays the same.
+
+- a tree for problem size $2^i$ has $\lg 2^i + 1 = i + 1$ levels
+- the next problem size after $2^i$ is $2^{i+1}$
+- which has one more level, $i+2$ levels
+- then $\lg 2^{i+1} + 1 = i+2$
+- hence the assumption holds
+
+Summing each level, gets $\Theta(n\lg n)$.

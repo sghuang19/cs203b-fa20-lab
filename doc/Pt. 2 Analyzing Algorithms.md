@@ -6,13 +6,13 @@ Pseudocode
 
 ```java
 for j = 2 to n
-key = A[j]
-// Insert A[j] into the sorted sequence A[1 ... j-1]
-i = j - 1
-while i > 0 and A[i] > key
-A[i + 1] = A[i]
-i = i - 1
-A[i + 1] = key
+    key = A[j]
+    // Insert A[j] into the sorted sequence A[1 ... j-1]
+    i = j - 1
+    while i > 0 and A[i] > key
+        A[i + 1] = A[i]
+        i = i - 1
+    A[i + 1] = key
 ```
 
 >A **loop invariant** can be used to prove the correctness of an algorithm
@@ -156,7 +156,7 @@ To sort `A[p ... r]`:
 
 ### Pseudocode
 
-```
+```java
 MERGE-SORT(A, p, r)
     if p < r
         q = ⌊(p + r)/2⌋          // divide
@@ -180,7 +180,7 @@ This would take linear time $\Theta(n)$, where $n = r - p + 1$, which is the **n
 >- Remove it from its pile, thereby exposing a new top card.
 >- Place the chosen card face-down onto the output pile.
 
-```
+```java
 MERGE(A, p, q, r)
     n1 = q - p + 1
     n2 = r - q

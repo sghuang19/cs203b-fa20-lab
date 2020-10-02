@@ -12,7 +12,7 @@ public class List {
     }
 
     public List(ListNode node) {
-        headListNode = node;
+        this.headListNode = node;
         size = 1;
         sorted = 0;
     }
@@ -22,12 +22,36 @@ public class List {
     }
 
     /**
-     * 0-unsorted, 1-ascending, -1-descending
-     * 
-     * @return
+     * @return 0-unsorted, 1-ascending, -1-descending
      */
+    // TODO
     public int sorted() {
-        return sorted;
+        ListNode key = this.headListNode;
+        int sorted_init = 1;
+        while (key.next != null && key.val == key.next.val) {
+            key = key.next;
+        }
+        if (key.val > key.next.val) {
+            sorted_init = -1;
+        } else
+            sorted_init = 1;
+
+        int sorted_temp = 0;
+        while (key.next != null) {
+            if (key.val > key.next.val) {
+                sorted_temp = -1;
+            }
+            if (key.val < key.next.val) {
+                sorted_temp = 1;
+            }
+            if (sorted_temp != sorted_init) {
+                this.sorted = 0;
+                return this.sorted;
+            }
+            key = key.next;
+        }
+
+        return this.sorted;
     }
 
     @Override
@@ -47,6 +71,7 @@ public class List {
      * sort the list ascending. Any sorting algorithm is OK. attribute sorted should
      * be changed to 1
      */
+    // TODO
     public void sort() {
     }
 
@@ -55,6 +80,32 @@ public class List {
      * list is sorted before
      */
     public void reverse() {
+        if (this.headListNode.next == null) {
+            this.sorted = -this.sorted;
+            return;
+        }
+
+        if (this.headListNode.next.next == null) {
+            this.headListNode.next.next = this.headListNode;
+            this.headListNode.next = null;
+            this.sorted = -this.sorted;
+            return;
+        }
+
+        ListNode key1 = this.headListNode;
+        ListNode key2 = this.headListNode.next;
+        ListNode key3 = this.headListNode.next.next;
+        this.headListNode.next = null;
+        while (key3.next != null) {
+            key2.next = key1;
+            key1 = key2;
+            key2 = key3;
+            key3 = key3.next;
+        }
+        key2.next = key1;
+        key3.next = key2;
+
+        this.sorted = -this.sorted;
     }
 
     /**
@@ -63,6 +114,11 @@ public class List {
      * @param node
      */
     public void addNode(ListNode node) {
+        ListNode key = this.headListNode;
+        while (key.next != null) {
+            key = key.next;
+        }
+        key.next = node;
     }
 
     /**
@@ -72,6 +128,39 @@ public class List {
      * @param node
      */
     public void addNodeSorted(ListNode node) {
+        // in case the node needs to be append before the headListNode
+        // also judge whether the List is sorted or not
+        if (this.sorted == 1) {
+            if (node.val <= this.headListNode.val) {
+                node.next = this.headListNode;
+                return;
+            }
+        }
+
+        // for there's only one node in the List
+        if (this.headListNode == null) {
+            this.headListNode.next = node;
+            if (this.headListNode.val <= node.val) {
+                this.sorted = 1;
+            } else
+                this.sorted = -1;
+        }
+
+        
+
+        ListNode key = this.headListNode;
+        boolean right_pos = key.val <= node.val && node.val <= key.next.val
+                || key.val >= node.val && node.val >= key.next.val;
+        while (key.next.next != null) {
+            if (right_pos) {
+                key.next = node;
+                node.next = key.next;
+                return;
+            } else
+                key = key.next;
+        }
+
+        key.next.next = node;
     }
 
     /**
@@ -80,6 +169,7 @@ public class List {
      * @param index
      * @param node
      */
+    // TODO
     public void addNode(int index, ListNode node) {
     }
 
@@ -89,6 +179,7 @@ public class List {
      * @param node
      * @return
      */
+    // TODO
     public boolean deleteNode(ListNode node) {
     }
 
@@ -98,18 +189,21 @@ public class List {
      * @param index
      * @return
      */
+    // TODO
     public boolean deleteNode(int index) {
     }
 
     /**
      * delete duplicated node from unsorted list
      */
+    // TODO
     public void deleteDuplicates() {
     }
 
     /**
      * delete duplicated node from sorted list
      */
+    // TODO
     public void deleteSortedDuplicates() {
     }
 
@@ -118,6 +212,7 @@ public class List {
      * 
      * @param listToMerge
      */
+    // TODO
     public void mergeList(List listToMerge) {
     }
 
@@ -126,6 +221,7 @@ public class List {
      * 
      * @param listToMerge
      */
+    // TODO
     public void mergeSortedList(List listToMerge) {
     }
 

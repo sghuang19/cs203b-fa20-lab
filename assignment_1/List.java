@@ -21,9 +21,13 @@ public class List {
         return size;
     }
 
+    /**
+     * 0-unsorted, 1-ascending, -1-descending
+     * 
+     * @return
+     */
     public int sorted() {
         return sorted;
-        // 0-unsorted, 1-ascending, -1-descending
     }
 
     @Override
@@ -39,51 +43,90 @@ public class List {
         return str;
     }
 
+    /**
+     * sort the list ascending. Any sorting algorithm is OK. attribute sorted should
+     * be changed to 1
+     */
     public void sort() {
-        // sort the list ascending. Any sorting algorithm is OK.
-        // attribute sorted should be changed to 1
     }
 
+    /**
+     * reverse the order of nodes of list attribute sorted should be changed if the
+     * list is sorted before
+     */
     public void reverse() {
-        // reverse the order of nodes of list
-        // attribute sorted should be changed if the list is sorted before
     }
 
+    /**
+     * add node to tail of list
+     * 
+     * @param node
+     */
     public void addNode(ListNode node) {
-        // add node to tail of list
     }
 
+    /**
+     * add node to sorted list and keep list still sorted node should add to the
+     * position according to the value
+     * 
+     * @param node
+     */
     public void addNodeSorted(ListNode node) {
-        // add node to sorted list and keep list still sorted
-        // node should add to the position according to the value
     }
 
+    /**
+     * add node to position of index, which is from 0
+     * 
+     * @param index
+     * @param node
+     */
     public void addNode(int index, ListNode node) {
-        // add node to position of index, which is from 0
     }
 
+    /**
+     * delete node, return true if success, false if fail
+     * 
+     * @param node
+     * @return
+     */
     public boolean deleteNode(ListNode node) {
-        // delete node, return true if success, false if fail
     }
 
+    /**
+     * delete node at position index(from 0), return true if success, false if fail
+     * 
+     * @param index
+     * @return
+     */
     public boolean deleteNode(int index) {
-        // delete node at position index(from 0), return true if success, false if fail
     }
 
+    /**
+     * delete duplicated node from unsorted list
+     */
     public void deleteDuplicates() {
-        // delete duplicated node from unsorted list
     }
 
+    /**
+     * delete duplicated node from sorted list
+     */
     public void deleteSortedDuplicates() {
-        // delete duplicated node from sorted list
     }
 
+    /**
+     * merge head of listToMerge to tail of original list
+     * 
+     * @param listToMerge
+     */
     public void mergeList(List listToMerge) {
-        // merge head of listToMerge to tail of original list
     }
 
+    /**
+     * merge to sorted lists and keep new list still sorted
+     * 
+     * @param listToMerge
+     */
     public void mergeSortedList(List listToMerge) {
-        // merge to sorted lists and keep new list still sorted
     }
 
 }

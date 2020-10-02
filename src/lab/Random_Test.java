@@ -1,3 +1,5 @@
+package lab;
+
 public class Random_Test {
     public static void main(String[] args) {
         double n = 1.6;

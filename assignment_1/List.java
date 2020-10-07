@@ -70,8 +70,26 @@ public class List {
      * sort the list ascending. Any sorting algorithm is OK. attribute sorted should
      * be changed to 1
      */
-    // TODO
     public void sort() {
+        // cursor is for inserting a node
+        ListNode cur = this.headListNode;
+        // key is to sort
+        ListNode key = this.headListNode.next;
+        ListNode temp;
+
+        while (key.next != null) {
+            while (key.next.val < cur.next.val) {
+                cur = cur.next;
+            }
+            temp = key.next;
+            key.next = key.next.next;
+            temp.next = cur.next.next.next;
+            cur.next.next = temp;
+
+            key = key.next;
+            cur = this.headListNode;
+        }
+
     }
 
     /**
@@ -167,16 +185,20 @@ public class List {
      * @param index
      * @param node
      */
-    // TODO
     public void addNode(int index, ListNode node) {
+        if (index == 0) {
+            node.next = this.headListNode;
+            this.headListNode = node;
+            return;
+        }
+
         ListNode key = this.headListNode;
         try {
             for (int i = 0; i < index - 1; i++) {
                 key = key.next;
             }
             node.next = key.next.next;
-            key.
-
+            key.next = node;
         } catch (NullPointerException e) {
         }
     }
@@ -234,17 +256,23 @@ public class List {
     /**
      * delete duplicated node from unsorted list
      */
-    // TODO
     public void deleteDuplicates() {
+        // "static" key
         ListNode key_s = this.headListNode;
-        ListNode key_d = this.headListNode.next;
-        try {
-            while (key_d.next != null) {
-                if (key_d.val == key_s.val) {
+        // "dynamic" key
+        ListNode key_d = this.headListNode;
 
+        // delete duplicated nodes
+        while (key_d.next != null) {
+            try {
+                if (key_d.val == key_s.next.val) {
+                    key_s.next = key_s.next.next;
                 }
+                key_s = key_s.next;
+            } catch (NullPointerException e) {
+                // if out of bounds, exit the loop
             }
-        } catch (NullPointerException e) {
+            key_d = key_d.next;
         }
 
     }
@@ -252,8 +280,22 @@ public class List {
     /**
      * delete duplicated node from sorted list
      */
-    // TODO
     public void deleteSortedDuplicates() {
+        ListNode key_a = this.headListNode;
+        ListNode key_b = this.headListNode.next;
+
+        while (key_a.next != null) {
+            try {
+                if (key_a.val == key_b.val) {
+                    key_a.next = key_a.next.next;
+                }
+                key_a = key_a.next;
+                key_b = key_b.next;
+            } catch (NullPointerException e) {
+                // handle exception
+            }
+        }
+
     }
 
     /**

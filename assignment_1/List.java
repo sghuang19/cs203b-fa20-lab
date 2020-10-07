@@ -24,7 +24,6 @@ public class List {
     /**
      * @return 0-unsorted, 1-ascending, -1-descending
      */
-    // TODO
     public int sorted() {
         ListNode key = this.headListNode;
         int sorted_init = 1;
@@ -146,8 +145,6 @@ public class List {
                 this.sorted = -1;
         }
 
-        
-
         ListNode key = this.headListNode;
         boolean right_pos = key.val <= node.val && node.val <= key.next.val
                 || key.val >= node.val && node.val >= key.next.val;
@@ -160,6 +157,7 @@ public class List {
                 key = key.next;
         }
 
+        // all the positions are not correct, append the new node to the final
         key.next.next = node;
     }
 
@@ -171,16 +169,40 @@ public class List {
      */
     // TODO
     public void addNode(int index, ListNode node) {
+        ListNode key = this.headListNode;
+        try {
+            for (int i = 0; i < index - 1; i++) {
+                key = key.next;
+            }
+            node.next = key.next.next;
+            key.
+
+        } catch (NullPointerException e) {
+        }
     }
 
     /**
-     * delete node, return true if success, false if fail
+     * delete node
      * 
      * @param node
-     * @return
+     * @return return true if success, false if fail
      */
-    // TODO
     public boolean deleteNode(ListNode node) {
+        // if the headListNode is to be deleted
+        if (this.headListNode == node) {
+            this.headListNode = null;
+            return true;
+        }
+
+        ListNode key = this.headListNode;
+        while (key.next != null) {
+            if (key.next == node) {
+                key.next = key.next.next;
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -189,8 +211,24 @@ public class List {
      * @param index
      * @return
      */
-    // TODO
     public boolean deleteNode(int index) {
+        // for the first node is to be deleted
+        if (index == 0) {
+            this.headListNode = null;
+            return true;
+        }
+
+        ListNode key = this.headListNode;
+        try {
+            for (int i = 0; i < index - 1; i++) {
+                key = key.next;
+            }
+            key.next = key.next.next;
+            return true;
+        } catch (NullPointerException e) {
+            return false;
+        }
+
     }
 
     /**
@@ -198,6 +236,17 @@ public class List {
      */
     // TODO
     public void deleteDuplicates() {
+        ListNode key_s = this.headListNode;
+        ListNode key_d = this.headListNode.next;
+        try {
+            while (key_d.next != null) {
+                if (key_d.val == key_s.val) {
+
+                }
+            }
+        } catch (NullPointerException e) {
+        }
+
     }
 
     /**
@@ -212,17 +261,22 @@ public class List {
      * 
      * @param listToMerge
      */
-    // TODO
     public void mergeList(List listToMerge) {
+        ListNode key = this.headListNode;
+        while (key.next != null) {
+            key = key.next;
+        }
+        key.next = listToMerge.headListNode;
     }
 
     /**
-     * merge to sorted lists and keep new list still sorted
+     * merge two sorted lists and keep new list still sorted
      * 
      * @param listToMerge
      */
-    // TODO
     public void mergeSortedList(List listToMerge) {
+        mergeList(listToMerge);
+        this.sort();
     }
 
 }

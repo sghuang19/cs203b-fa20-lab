@@ -57,7 +57,7 @@ public class List {
     public String toString() {
         String str = "[";
         // str += val;
-        ListNode pListNode = headListNode;
+        ListNode pListNode = this.headListNode;
         while (pListNode.next != null) {
             str += pListNode.val + ", ";
             pListNode = pListNode.next;
@@ -71,24 +71,38 @@ public class List {
      * be changed to 1
      */
     public void sort() {
-        // cursor is for inserting a node
-        ListNode cur = this.headListNode;
-        // key is to sort
-        ListNode key = this.headListNode.next;
-        ListNode temp;
+        if (this.headListNode == null || this.headListNode.next == null)
+            return;
 
-        while (key.next != null) {
-            while (key.next.val < cur.next.val) {
-                cur = cur.next;
+        // cursor is the node to be inserted
+        ListNode cur = this.headListNode.next;
+        // key is the end of the sorted list
+        ListNode key = this.headListNode;
+        // aus is an auxillary node before head
+        ListNode aux = new ListNode(-1);
+        aux.next = this.headListNode;
+
+        try {
+            while (cur != null) {
+                if (cur.val < key.val) {
+                    ListNode temp = aux;
+                    while (cur.val > temp.next.val) {
+                        temp = temp.next;
+                    }
+                    key.next = cur.next;
+                    cur.next = temp.next;
+                    temp.next = cur;
+
+                }
+
+                key = key.next;
+                cur = key.next;
             }
-            temp = key.next;
-            key.next = key.next.next;
-            temp.next = cur.next.next.next;
-            cur.next.next = temp;
-
-            key = key.next;
-            cur = this.headListNode;
+            key.next = null;
+        } catch (Exception ignored) {
         }
+
+        this.headListNode = aux.next;
 
     }
 
@@ -97,11 +111,14 @@ public class List {
      * list is sorted before
      */
     public void reverse() {
+
+        // if there's only one node
         if (this.headListNode.next == null) {
             this.sorted = -this.sorted;
             return;
         }
 
+        // if there's only two nodes
         if (this.headListNode.next.next == null) {
             this.headListNode.next.next = this.headListNode;
             this.headListNode.next = null;
@@ -121,13 +138,14 @@ public class List {
         }
         key2.next = key1;
         key3.next = key2;
+        this.headListNode = key3;
 
         this.sorted = -this.sorted;
     }
 
     /**
      * add node to tail of list
-     * 
+     *
      * @param node
      */
     public void addNode(ListNode node) {
@@ -141,47 +159,46 @@ public class List {
     /**
      * add node to sorted list and keep list still sorted node should add to the
      * position according to the value
-     * 
+     *
      * @param node
      */
     public void addNodeSorted(ListNode node) {
         // in case the node needs to be append before the headListNode
         // also judge whether the List is sorted or not
-        if (this.sorted == 1) {
-            if (node.val <= this.headListNode.val) {
-                node.next = this.headListNode;
-                return;
-            }
+        if (this.sorted == 1 && node.val <= this.headListNode.val) {
+            node.next = this.headListNode;
+            return;
         }
 
         // for there's only one node in the List
-        if (this.headListNode == null) {
+        if (this.headListNode.next == null) {
             this.headListNode.next = node;
-            if (this.headListNode.val <= node.val) {
+            if (this.headListNode.val <= node.val)
                 this.sorted = 1;
-            } else
+            else
                 this.sorted = -1;
         }
 
         ListNode key = this.headListNode;
-        boolean right_pos = key.val <= node.val && node.val <= key.next.val
-                || key.val >= node.val && node.val >= key.next.val;
-        while (key.next.next != null) {
-            if (right_pos) {
-                key.next = node;
+        while (key.next != null) {
+            boolean valid_pos = key.val <= node.val && node.val <= key.next.val
+                    || key.val >= node.val && node.val >= key.next.val;
+            if (valid_pos) {
                 node.next = key.next;
+                key.next = node;
                 return;
             } else
                 key = key.next;
         }
 
         // all the positions are not correct, append the new node to the final
-        key.next.next = node;
+        key.next = node;
+        node.next = null;
     }
 
     /**
      * add node to position of index, which is from 0
-     * 
+     *
      * @param index
      * @param node
      */
@@ -200,12 +217,19 @@ public class List {
             node.next = key.next.next;
             key.next = node;
         } catch (NullPointerException e) {
+            key = this.headListNode;
+            while (key.next != null) {
+                key = key.next;
+            }
+            key.next = node;
+            assert node != null;
+            node.next = null;
         }
     }
 
     /**
      * delete node
-     * 
+     *
      * @param node
      * @return return true if success, false if fail
      */
@@ -222,6 +246,7 @@ public class List {
                 key.next = key.next.next;
                 return true;
             }
+            key = key.next;
         }
 
         return false;
@@ -229,14 +254,14 @@ public class List {
 
     /**
      * delete node at position index(from 0), return true if success, false if fail
-     * 
+     *
      * @param index
      * @return
      */
     public boolean deleteNode(int index) {
         // for the first node is to be deleted
         if (index == 0) {
-            this.headListNode = null;
+            this.headListNode = this.headListNode.next;
             return true;
         }
 
@@ -263,16 +288,19 @@ public class List {
         ListNode key_d = this.headListNode;
 
         // delete duplicated nodes
-        while (key_d.next != null) {
-            try {
-                if (key_d.val == key_s.next.val) {
-                    key_s.next = key_s.next.next;
+        try {
+            while (key_s.next != null) {
+                while (key_d.next != null) {
+                    if (key_d == key_s.next) {
+                        key_d.next = key_d.next.next;
+                    }
+                    key_d = key_d.next;
                 }
                 key_s = key_s.next;
-            } catch (NullPointerException e) {
-                // if out of bounds, exit the loop
+                key_d = key_s.next;
             }
-            key_d = key_d.next;
+        } catch (NullPointerException ignored) {
+            // if out of bounds, exit the loop
         }
 
     }
@@ -284,23 +312,23 @@ public class List {
         ListNode key_a = this.headListNode;
         ListNode key_b = this.headListNode.next;
 
-        while (key_a.next != null) {
-            try {
+        try {
+            while (key_a.next != null) {
                 if (key_a.val == key_b.val) {
                     key_a.next = key_a.next.next;
                 }
                 key_a = key_a.next;
                 key_b = key_b.next;
-            } catch (NullPointerException e) {
-                // handle exception
             }
+        } catch (NullPointerException ignored) {
+            // handle exception
         }
 
     }
 
     /**
      * merge head of listToMerge to tail of original list
-     * 
+     *
      * @param listToMerge
      */
     public void mergeList(List listToMerge) {
@@ -313,7 +341,7 @@ public class List {
 
     /**
      * merge two sorted lists and keep new list still sorted
-     * 
+     *
      * @param listToMerge
      */
     public void mergeSortedList(List listToMerge) {

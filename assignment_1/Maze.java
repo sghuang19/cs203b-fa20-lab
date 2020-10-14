@@ -63,7 +63,7 @@ public class Maze {
 
             // step left
             if (y - 1 >= 0 && this.mazeMat[x][y - 1] != 1 && !invalid_path.contains(x, y) && !path.contains(x, y - 1)) {
-                path.push(new Node(x - 1, y));
+                path.push(new Node(x, y - 1));
                 y--;
                 continue;
             }

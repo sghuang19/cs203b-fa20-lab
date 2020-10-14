@@ -7,13 +7,13 @@ public class MazeTest {
         int height = 6;
         int[][] mazeMatrix_1 = { { 1, 1, 0, 1, 1, 1, 1, 1, 1, 1 }, { 0, 1, 1, 1, 0, 0, 0, 0, 0, 0 },
                 { 0, 1, 1, 1, 0, 0, 0, 0, 0, 0 }, { 0, 1, 0, 1, 1, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 },
-                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } };
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 } };
         int[][] mazeMatrix_2 = { { 0, 1, 0, 1, 1, 1, 1, 1, 1, 1 }, { 0, 0, 1, 1, 0, 0, 1, 0, 0, 0 },
                 { 0, 1, 1, 1, 0, 0, 1, 1, 0, 0 }, { 0, 1, 0, 1, 1, 0, 0, 0, 1, 0 }, { 0, 0, 0, 0, 1, 1, 1, 1, 1, 0 },
                 { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } };
-        Maze maze_1 = new Maze(mazeMatrix_1, 10, 6);
+        Maze maze_1 = new Maze(mazeMatrix_1, 10, 7);
         System.out.print(maze_1);
-        maze_1.DFSearchPath(0, 0, 4, 4);
+        maze_1.DFSearchPath(6, 0, 6, 9);
         System.out.println("the path is: ");
         System.out.print(maze_1);
         System.out.println();

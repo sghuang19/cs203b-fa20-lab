@@ -35,9 +35,8 @@ public class Snake {
         this.width = width;
         this.height = height;
         grid = new int[height][width];
-        for (int[] ints : grid) {
+        for (int[] ints : grid)
             Arrays.fill(ints, 1);
-        }
         foodPos = new pos(5, 5);
     }
 
@@ -67,9 +66,8 @@ public class Snake {
         resultString.append("\n");
 
         for (int[] is : grid) {
-            for (int i : is) {
+            for (int i : is)
                 resultString.append(i);
-            }
             resultString.append("\n");
         }
 
@@ -139,7 +137,7 @@ public class Snake {
      * @param x
      * @param y
      * @return if food is on the snake, return true, food should disappear and
-     * generates new food
+     *         generates new food
      */
     public boolean FoodOnSnake(int x, int y) {
         for (pos p : this.queueSnake) {

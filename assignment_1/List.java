@@ -345,7 +345,7 @@ public class List {
      * @param listToMerge
      */
     public void mergeSortedList(List listToMerge) {
-        mergeList(listToMerge);
+        this.mergeList(listToMerge);
         this.sort();
     }
 

@@ -77,6 +77,12 @@ public class KMPJUnitTest extends KMP {
         result = KMPFindLocations(S, P);
         System.out.println(result);
         assertEquals("[0]", result.toString());
+
+        P = "aba";
+        S = "ababa";
+        result = KMPFindLocations(S, P);
+        System.out.println(result);
+        assertEquals("[0, 2]", result.toString());
     }
 
     @After

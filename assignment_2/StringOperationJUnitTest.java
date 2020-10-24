@@ -34,6 +34,12 @@ public class StringOperationJUnitTest extends StringOperation {
         result = addStrings(num1, num2);
         System.out.println(result);
         assertEquals("ABCCCF", result);
+
+        num1 = "+AAA123";
+        num2 = "+12BAC";
+        result = addStrings(num1, num2);
+        System.out.println(result);
+        assertEquals("ABCCCF", result);
     }
 
     @Test
@@ -57,7 +63,7 @@ public class StringOperationJUnitTest extends StringOperation {
         System.out.println(result);
         assertEquals("70E4", result);
 
-        num1 = "123AAA";
+        num1 = "+123AAA";
         num2 = "-4A5B6CD";
         result = multiply(num1, num2);
         System.out.println(result);

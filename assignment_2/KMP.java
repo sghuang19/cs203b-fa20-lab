@@ -36,10 +36,7 @@ public class KMP {
      */
     public static int KMPSearchTimes(String text, String pattern) {
         LinkedList<Integer> locations = KMPFindLocations(text, pattern);
-        if (locations.get(0) == -1)
-            return 0;
-        else
-            return locations.size();
+        return (locations.get(0) == -1) ? 0 : locations.size();
     }
 
     /**
@@ -73,7 +70,7 @@ public class KMP {
                     // i out of bounds,, searching ends
                     break;
             }
-            
+
             // if the first character is not a match, go on
             if (j == 0)
                 i++;

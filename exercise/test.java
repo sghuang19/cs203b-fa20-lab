@@ -9,5 +9,11 @@ public class test {
         System.out.println(i);
         i = 0;
         System.out.println(i -= 10);
+
+        int num = 10;
+        System.out.println(Integer.toHexString(num));
+        String hex = "F";
+        int x = Integer.parseInt(hex, 16);
+        System.out.println(x);
     }
 }

@@ -31,7 +31,7 @@ public class StringOperation {
         boolean n2 = num2.charAt(0) == '-';
 
         if (n1 && n2)
-            return "-" + addStrings(num1.substring(1), num2.substring(1));
+            return '-' + addStrings(num1.substring(1), num2.substring(1));
         if (n1)
             return subtractStrings(num2.substring(1), num1);
         if (n2)
@@ -47,8 +47,9 @@ public class StringOperation {
             s = num1;
             l = num2;
         }
-        for (int i = 0; i < l.length() - s.length(); i++)
-            s = "0" + s;
+        int m = l.length() - s.length();
+        for (int i = 0; i < m; i++)
+            s = '0' + s;
         int i = l.length() - 1;
         boolean p = false;
         int temp;
@@ -81,11 +82,11 @@ public class StringOperation {
         String l = num1;
         String s = num2;
         if (num1.length() > num2.length())
-            for (int i = 0; i < l.length() - s.length(); i++)
-                s = "0" + s;
+            for (int i = 0; i < num1.length() - num2.length(); i++)
+                s = '0' + s;
         else if (num1.length() < num2.length())
-            for (int i = 0; i < s.length() - l.length(); i++)
-                l = "0" + l;
+            for (int i = 0; i < num2.length() - num1.length(); i++)
+                l = '0' + l;
 
         int i = l.length() - 1;
         boolean p = false;
@@ -93,16 +94,23 @@ public class StringOperation {
 
         // this is the subtraction for both numbers to be positive
         while (i >= 0) {
-            temp = 0;
-            temp -= Integer.parseInt("" + l.charAt(i), 16);
+            temp = Integer.parseInt("" + l.charAt(i), 16);
             temp -= Integer.parseInt("" + s.charAt(i), 16);
             temp -= (p) ? 1 : 0;
             p = temp < 0;
-            diff.append(Integer.toHexString(temp -= (p) ? 16 : 0).toUpperCase());
+            diff.append(Integer.toHexString(temp += (p) ? 16 : 0).toUpperCase());
             i--;
         }
-        if (p)
-            diff.append('1');
+
+        if (p) {
+            String x = "1";
+            for (int j = 0; j < diff.length(); j++)
+                x += '0';
+            return "-" + subtractStrings(x, diff.reverse().toString());
+        }
+
+        if (diff.charAt(diff.length() - 1) == '0')
+            diff.deleteCharAt(diff.length() - 1);
 
         return diff.reverse().toString();
     }
@@ -115,10 +123,53 @@ public class StringOperation {
      * @return
      */
     public static String multiply(String num1, String num2) {
-        return num2;
-        /*
-         * TODO: YOUR CODE HERE
-         */
-    }
+        boolean n1 = num1.charAt(0) == '-';
+        boolean n2 = num2.charAt(0) == '-';
+        if (n1 && n2)
+            return multiply(num1.substring(1), num2.substring(1));
+        if (n1)
+            return '-' + multiply(num1.substring(1), num2);
+        if (n2)
+            return '-' + multiply(num1, num2.substring(1));
 
+        String l;
+        String s;
+        if (num1.length() >= num2.length()) {
+            l = num1;
+            s = num2;
+        } else {
+            s = num1;
+            l = num2;
+        }
+        int p = 0;
+        int x;
+        int y;
+        int temp;
+
+        // this is the multiplication for both numbers to be positive
+        StringBuilder sum = new StringBuilder("");
+        StringBuilder prod = new StringBuilder("0");
+        for (int i = s.length() - 1; i >= 0; i--) {
+            sum = new StringBuilder("");
+            x = Integer.parseInt("" + s.charAt(i), 16);
+            p = 0;
+            for (int j = l.length() - 1; j >= 0; j--) {
+                temp = 0;
+                y = Integer.parseInt("" + l.charAt(j), 16);
+                temp = x * y;
+                temp += p;
+                temp -= 16 * (p = temp / 16);
+                sum.append(Integer.toHexString(temp).toUpperCase());
+            }
+            if (p != 0)
+                sum.append(p);
+            for (int j = i; j < s.length() - 1; j++)
+                sum.insert(0, '0');
+
+            prod.replace(0, prod.length(), addStrings(prod.toString(), sum.reverse().toString()));
+        }
+        // if (p != 0)
+        // prod.insert(0, Integer.toHexString(p).toUpperCase());
+        return prod.toString();
+    }
 }

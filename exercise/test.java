@@ -15,5 +15,7 @@ public class test {
         String hex = "F";
         int x = Integer.parseInt(hex, 16);
         System.out.println(x);
+
+        System.out.println(23/16);
     }
 }

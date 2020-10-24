@@ -20,6 +20,12 @@ public class StringOperationJUnitTest extends StringOperation {
         result = addStrings(num1, num2);
         System.out.println(result);
         assertEquals("579", result);
+
+        num1 = "AAA123";
+        num2 = "12BAC";
+        result = addStrings(num1, num2);
+        System.out.println(result);
+        assertEquals("ABCCCF", result);
     }
 
     @Test

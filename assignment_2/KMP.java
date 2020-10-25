@@ -79,7 +79,7 @@ public class KMP {
                 j = next[j];
         }
 
-        if (locations.get(0) == -1)
+        if (locations.size() != 1)
             locations.remove(0);
         return locations;
     }

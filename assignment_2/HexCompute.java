@@ -16,7 +16,7 @@ package assignment_2;
  * <p>
  * 4. Single input string is less then 200 digits.
  */
-public class StringOperation {
+public class HexCompute {
     /**
      * Calculate the sum of num1 and num2, result also in String form. Inside this
      * method, if there is and only is one negative number, it calls the
@@ -71,6 +71,9 @@ public class StringOperation {
         if (p)
             sum.append('1');
 
+        // if (sum.length() != 1 && sum.charAt(sum.length() - 1) == '0')
+        //     sum.deleteCharAt(sum.length() - 1);
+
         return sum.reverse().toString();
     }
 
@@ -113,7 +116,8 @@ public class StringOperation {
             return "-" + subtractStrings(x, diff.reverse().toString());
         }
 
-        if (diff.charAt(diff.length() - 1) == '0')
+        char a = diff.charAt(diff.length() - 1);
+        while (diff.charAt(diff.length() - 1) == '0')
             diff.deleteCharAt(diff.length() - 1);
 
         return diff.reverse().toString();
@@ -127,6 +131,9 @@ public class StringOperation {
      * @return
      */
     public static String multiply(String num1, String num2) {
+        if (num1.charAt(0) == '0' || num2.charAt(0) == '0')
+            return "0";
+
         boolean p1 = num1.charAt(0) == '+';
         boolean p2 = num2.charAt(0) == '+';
         if (p1)
@@ -165,11 +172,16 @@ public class StringOperation {
                 sum.append(Integer.toHexString(temp).toUpperCase());
             }
             if (p != 0)
-                sum.append(p);
+                sum.append(Integer.toHexString(p));
             sum.insert(0, "0".repeat(num2.length() - 1 - i));
 
             prod.replace(0, prod.length(), addStrings(prod.toString(), sum.reverse().toString()));
         }
+
+        String str = prod.toString();
+        if (prod.length() != 1 && prod.charAt(0) == '0')
+            prod.deleteCharAt(0);
+
         return prod.toString();
     }
 }

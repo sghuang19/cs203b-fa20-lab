@@ -40,6 +40,13 @@ public class StringOperationJUnitTest extends StringOperation {
         result = addStrings(num1, num2);
         System.out.println(result);
         assertEquals("ABCCCF", result);
+    
+    
+        num1 = "-AAAAA";
+        num2 = "AA";
+        result = addStrings(num1, num2);
+        System.out.println(result);
+        assertEquals("-AAA00", result);
     }
 
     @Test
@@ -90,5 +97,23 @@ public class StringOperationJUnitTest extends StringOperation {
         result = subtractStrings(num1, num2);
         System.out.println(result);
         assertEquals("A97577", result);
+
+        num1 = "A";
+        num2 = "AA";
+        result = subtractStrings(num1, num2);
+        System.out.println(result);
+        assertEquals("-A0", result);
+
+        num1 = "AAA";
+        num2 = "AAA";
+        result = subtractStrings(num1, num2);
+        System.out.println(result);
+        assertEquals("0", result);
+
+        num1 = "AAA";
+        num2 = "9AA";
+        result = subtractStrings(num1, num2);
+        System.out.println(result);
+        assertEquals("100", result);
     }
 }

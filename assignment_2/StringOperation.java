@@ -39,9 +39,9 @@ public class StringOperation {
         if (n1 && n2)
             return '-' + addStrings(num1.substring(1), num2.substring(1));
         if (n1)
-            return subtractStrings(num2.substring(1), num1);
+            return subtractStrings(num2, num1.substring(1));
         if (n2)
-            return subtractStrings(num1.substring(1), num2);
+            return subtractStrings(num1, num2.substring(1));
 
         StringBuilder sum = new StringBuilder();
         String l;
@@ -84,13 +84,15 @@ public class StringOperation {
      * @return the Hex difference num1 - num2, in form of String
      */
     public static String subtractStrings(String num1, String num2) {
+        if (num1.equals(num2))
+            return "0";
+
         StringBuilder diff = new StringBuilder();
         StringBuilder l = new StringBuilder(num1);
         StringBuilder s = new StringBuilder(num2);
-        if (num1.length() > num2.length())
-            s.insert(0, "0".repeat(num1.length() - num2.length()));
-        else if (num1.length() < num2.length())
-            l.insert(0, "0".repeat(num2.length() - num1.length()));
+        int m = Math.max(l.length(), s.length());
+        s.insert(0, "0".repeat(m - s.length()));
+        l.insert(0, "0".repeat(m - l.length()));
 
         int i = l.length() - 1;
         boolean p = false;
@@ -141,15 +143,8 @@ public class StringOperation {
         if (n2)
             return '-' + multiply(num1, num2.substring(1));
 
-        String l;
-        String s;
-        if (num1.length() >= num2.length()) {
-            l = num1;
-            s = num2;
-        } else {
-            s = num1;
-            l = num2;
-        }
+        if (num1.length() < num2.length())
+            return multiply(num2, num1);
         int p;
         int x;
         int y;
@@ -158,12 +153,12 @@ public class StringOperation {
         // this is the multiplication for both numbers to be positive
         StringBuilder sum;
         StringBuilder prod = new StringBuilder("0");
-        for (int i = s.length() - 1; i >= 0; i--) {
+        for (int i = num2.length() - 1; i >= 0; i--) {
             sum = new StringBuilder();
-            x = Integer.parseInt("" + s.charAt(i), 16);
+            x = Integer.parseInt("" + num2.charAt(i), 16);
             p = 0;
-            for (int j = l.length() - 1; j >= 0; j--) {
-                y = Integer.parseInt("" + l.charAt(j), 16);
+            for (int j = num1.length() - 1; j >= 0; j--) {
+                y = Integer.parseInt("" + num1.charAt(j), 16);
                 temp = x * y;
                 temp += p;
                 temp -= 16 * (p = temp / 16);
@@ -171,7 +166,7 @@ public class StringOperation {
             }
             if (p != 0)
                 sum.append(p);
-            sum.insert(0, "0".repeat(s.length() - 1 - i));
+            sum.insert(0, "0".repeat(num2.length() - 1 - i));
 
             prod.replace(0, prod.length(), addStrings(prod.toString(), sum.reverse().toString()));
         }

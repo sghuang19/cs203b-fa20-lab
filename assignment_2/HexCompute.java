@@ -72,7 +72,7 @@ public class HexCompute {
             sum.append('1');
 
         // if (sum.length() != 1 && sum.charAt(sum.length() - 1) == '0')
-        //     sum.deleteCharAt(sum.length() - 1);
+        // sum.deleteCharAt(sum.length() - 1);
 
         return sum.reverse().toString();
     }
@@ -116,7 +116,6 @@ public class HexCompute {
             return "-" + subtractStrings(x, diff.reverse().toString());
         }
 
-        char a = diff.charAt(diff.length() - 1);
         while (diff.charAt(diff.length() - 1) == '0')
             diff.deleteCharAt(diff.length() - 1);
 
@@ -178,7 +177,6 @@ public class HexCompute {
             prod.replace(0, prod.length(), addStrings(prod.toString(), sum.reverse().toString()));
         }
 
-        String str = prod.toString();
         if (prod.length() != 1 && prod.charAt(0) == '0')
             prod.deleteCharAt(0);
 

@@ -3,8 +3,6 @@ package exercise;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import exercise.hello;
-
 public class test {
     public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, SecurityException,
             IllegalAccessException, IllegalArgumentException, InvocationTargetException {

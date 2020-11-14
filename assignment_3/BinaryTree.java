@@ -3,7 +3,6 @@ package assignment_3;
 
 import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.NoSuchElementException;
 import java.util.Queue;
 
 public class BinaryTree {
@@ -95,19 +94,28 @@ public class BinaryTree {
     }
 
     public static String PreIn2Post(String preTraversal, String inTraversal) {
-
+        return PreIn2PostTree(preTraversal, inTraversal).TraversalPostOrder();
     }
 
     public static BinaryTree PreIn2PostTree(String preTraversal, String inTraversal) {
+        if (preTraversal.length() == 0 || inTraversal.length() == 0)
+            return new BinaryTree(null);
+
         int[] pre = String2Array(preTraversal);
         int[] in = String2Array(inTraversal);
 
-        TreeNode root = new TreeNode(in[0]);
-        BinaryTree tree = new BinaryTree(root);
+        TreeNode x = new TreeNode(pre[0]);
+        BinaryTree tree = new BinaryTree(x);
+
         for (int i = 0; i < in.length; i++) {
             if (pre[0] == in[i]) {
-                root.left = PreIn2Post(Array2String(Arrays.copyOfRange(pre, 1, i + 1)), Array2String(Arrays.copyOfRange(in, 0, i))).root;
-                root.right = reConstructBinaryTree(Arrays.copyOfRange(pre, i + 1, pre.length), Arrays.copyOfRange(in, i + 1, in.length));
+                int[] left_sub_pre = Arrays.copyOfRange(pre, 1, i + 1);
+                int[] left_sub_in = Arrays.copyOfRange(in, 0, i);
+                x.left = PreIn2PostTree(Array2String(left_sub_pre), Array2String(left_sub_in)).root;
+
+                int[] right_sub_pre = Arrays.copyOfRange(pre, i + 1, pre.length);
+                int[] right_sub_in = Arrays.copyOfRange(in, i + 1, in.length);
+                x.right = PreIn2PostTree(Array2String(right_sub_pre), Array2String(right_sub_in)).root;
             }
         }
         return tree;

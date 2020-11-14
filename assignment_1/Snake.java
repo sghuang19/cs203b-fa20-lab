@@ -3,7 +3,6 @@ package assignment_1;
 import java.util.*;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 /**
  * in array grid

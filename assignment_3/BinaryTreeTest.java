@@ -1,6 +1,6 @@
+package assignment_3;
 
 import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
 
 public class BinaryTreeTest {
@@ -14,7 +14,7 @@ public class BinaryTreeTest {
 		TreeNode node2 = new TreeNode(20);
 		BinaryTree.AddLeft(node0, node1);
 		BinaryTree.AddRight(node0, node2);
-		
+
 		TreeNode node3 = new TreeNode(15);
 		TreeNode node4 = new TreeNode(7);
 		BinaryTree.AddLeft(node1, node3);
@@ -36,8 +36,8 @@ public class BinaryTreeTest {
 		assertEquals(binaryTree.PreIn2Post(binaryTree.TraversalPreOrder(), binaryTree.TraversalInOrder()),
 				binaryTree.TraversalPostOrder());
 
-		System.out.println(binaryTree.InPost2Pre(binaryTree.TraversalInOrder(), binaryTree.TraversalPostOrder()));
-		assertEquals(binaryTree.InPost2Pre(binaryTree.TraversalInOrder(), binaryTree.TraversalPostOrder()),
-				binaryTree.TraversalPreOrder());
+//		System.out.println(binaryTree.InPost2Pre(binaryTree.TraversalInOrder(), binaryTree.TraversalPostOrder()));
+//		assertEquals(binaryTree.InPost2Pre(binaryTree.TraversalInOrder(), binaryTree.TraversalPostOrder()),
+//				binaryTree.TraversalPreOrder());
 	}
 }

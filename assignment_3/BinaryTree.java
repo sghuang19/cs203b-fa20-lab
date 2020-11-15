@@ -121,13 +121,36 @@ public class BinaryTree {
         return tree;
     }
 
-    //
-//    public String InPost2Pre(String inTraversal, String postTraversal) {
-//    }
 
-    //
-//    public BinaryTree InPost2Pre(String inTraversal, String postTraversal) {
-//    }
+    public static String InPost2Pre(String inTraversal, String postTraversal) {
+        return InPost2PreTree(inTraversal, postTraversal).TraversalPreOrder();
+    }
+
+
+    public static BinaryTree InPost2PreTree(String inTraversal, String postTraversal) {
+        if (inTraversal.length() == 0 || postTraversal.length() == 0)
+            return new BinaryTree(null);
+
+        int[] in = String2Array(inTraversal);
+        int l = in.length;
+        int[] post = String2Array(postTraversal);
+
+        TreeNode x = new TreeNode(post[l - 1]);
+        BinaryTree tree = new BinaryTree(x);
+
+        for (int i = 0; i < l; i++) {
+            if (post[l - 1] == in[i]) {
+                int[] left_sub_post = Arrays.copyOfRange(post, 0, i);
+                int[] left_sub_in = Arrays.copyOfRange(in, 0, i);
+                x.left = InPost2PreTree(Array2String(left_sub_in), Array2String(left_sub_post)).root;
+
+                int[] right_sub_post = Arrays.copyOfRange(post, i, l - 1);
+                int[] right_sub_in = Arrays.copyOfRange(in, i + 1, l);
+                x.right = InPost2PreTree(Array2String(right_sub_in), Array2String(right_sub_post)).root;
+            }
+        }
+        return tree;
+    }
 
     private static String Array2String(int[] array) {
         StringBuilder output = new StringBuilder();

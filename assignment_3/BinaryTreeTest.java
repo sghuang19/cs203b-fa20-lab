@@ -33,13 +33,13 @@ public class BinaryTreeTest {
         System.out.println("TraversalLevelOrder:" + binaryTree.TraversalLevelOrder());
         assertEquals("[3 ][9 20 ][15 7 ]", binaryTree.TraversalLevelOrder());
 
-        String result = BinaryTree.PreIn2Post(binaryTree.TraversalPreOrder(), binaryTree.TraversalInOrder());
+        String result;
+        result = BinaryTree.PreIn2Post(binaryTree.TraversalPreOrder(), binaryTree.TraversalInOrder());
         System.out.println(result);
         assertEquals(binaryTree.TraversalPostOrder(), result);
 
-
-//		System.out.println(binaryTree.InPost2Pre(binaryTree.TraversalInOrder(), binaryTree.TraversalPostOrder()));
-//		assertEquals(binaryTree.InPost2Pre(binaryTree.TraversalInOrder(), binaryTree.TraversalPostOrder()),
-//				binaryTree.TraversalPreOrder());
+        result = BinaryTree.InPost2Pre(binaryTree.TraversalInOrder(), binaryTree.TraversalPostOrder());
+        System.out.println(result);
+        assertEquals(binaryTree.TraversalPreOrder(), result);
     }
 }

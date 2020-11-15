@@ -36,8 +36,7 @@ public class BinaryTree {
         TreeNode x = this.root;
         if (x != null) {
             output.append(new BinaryTree(x.left).TraversalInOrder());
-            output.append(x.val);
-            output.append(" ");
+            output.append(x.val).append(" ");
             output.append(new BinaryTree(x.right).TraversalInOrder());
         }
         return output.toString();
@@ -46,8 +45,7 @@ public class BinaryTree {
     public String TraversalPreOrder() {
         StringBuilder output = new StringBuilder();
         if (this.root != null) {
-            output.append(this.root.val);
-            output.append(" ");
+            output.append(this.root.val).append(" ");
             if (this.root.left != null)
                 output.append(new BinaryTree(this.root.left).TraversalPreOrder());
             if (this.root.left != null)
@@ -63,8 +61,7 @@ public class BinaryTree {
                 output.append(new BinaryTree(this.root.left).TraversalPostOrder());
             if (this.root.left != null)
                 output.append(new BinaryTree(this.root.right).TraversalPostOrder());
-            output.append(this.root.val);
-            output.append(" ");
+            output.append(this.root.val).append(" ");
         }
         return output.toString();
     }
@@ -80,8 +77,7 @@ public class BinaryTree {
             output.append("[");
             for (int i = 0; i < level; i++) {
                 TreeNode T = queue.remove();
-                output.append(T.val);
-                output.append(" ");
+                output.append(T.val).append(" ");
                 if (T.left != null)
                     queue.offer(T.left);
                 if (T.right != null)
@@ -97,7 +93,7 @@ public class BinaryTree {
         return PreIn2PostTree(preTraversal, inTraversal).TraversalPostOrder();
     }
 
-    public static BinaryTree PreIn2PostTree(String preTraversal, String inTraversal) {
+    private static BinaryTree PreIn2PostTree(String preTraversal, String inTraversal) {
         if (preTraversal.length() == 0 || inTraversal.length() == 0)
             return new BinaryTree(null);
 
@@ -127,7 +123,7 @@ public class BinaryTree {
     }
 
 
-    public static BinaryTree InPost2PreTree(String inTraversal, String postTraversal) {
+    private static BinaryTree InPost2PreTree(String inTraversal, String postTraversal) {
         if (inTraversal.length() == 0 || postTraversal.length() == 0)
             return new BinaryTree(null);
 

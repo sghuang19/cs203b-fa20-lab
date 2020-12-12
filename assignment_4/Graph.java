@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * The graph stored as adjacencyList, which is a ArrayList of ArrayList of int
  * array.
- * 
+ * <p>
  * The index of the adjacencyList indicates the vertex, and each element of the
  * adjacencyList is another ArrayList, each element of which is an int array,
  * the first element in the array represents the endVertex, the second element
@@ -26,7 +26,7 @@ public class Graph {
 
     /**
      * Constructor with isDirected and adjacencyList given.
-     * 
+     *
      * @param isDirected
      * @param adjacencyList
      */
@@ -38,7 +38,7 @@ public class Graph {
     /**
      * Constructor with adjacencyList given only, isDirected is set to be default as
      * true.
-     * 
+     *
      * @param adjacencyList
      */
     public Graph(ArrayList<ArrayList<int[]>> adjacencyList) {
@@ -48,7 +48,7 @@ public class Graph {
 
     /**
      * Constructor with the file name of the graph file.
-     * 
+     *
      * @param strFile the file name of the graph file
      * @throws IOException
      */
@@ -59,10 +59,10 @@ public class Graph {
     /**
      * Read graph file, this method will set the graph object to be the graph
      * specified in the graph file, and returns the adjacency list.
-     * 
+     *
      * @param strFile the file name of the graph file
      * @return the adjacency list read
-     * @throws IOException
+     * @throws IOException IOException
      */
     public ArrayList<ArrayList<int[]>> readGraphFile(String strFile) throws IOException {
         BufferedReader bf = new BufferedReader(new FileReader(strFile));
@@ -80,19 +80,27 @@ public class Graph {
         // System.out.println(string);
         // }
 
-        for (int i = 0; i < numbs.length / 3; i++) {
+        for (int i = 0; i < numbs.length; i += 3) {
+//            System.out.println("=========");
+//            System.out.println(i);
             int startVertex = Integer.parseInt(numbs[i]);
             int endVertex = Integer.parseInt(numbs[i + 1]);
             int weight = Integer.parseInt(numbs[i + 2]);
             this.addEdge(startVertex, endVertex, weight);
+//            System.out.println(i);
+//            System.out.println("=========");
         }
+        return adjacencyList;
+    }
+
+    public ArrayList<ArrayList<int[]>> getAdjacencyList() {
         return adjacencyList;
     }
 
     /**
      * Extend the size of the adjacency list to the index of the vertex, equivalent
      * with adding this node
-     * 
+     *
      * @param vertex the index of the vertex
      * @return if the node already exists, return false, else return true
      */
@@ -100,33 +108,33 @@ public class Graph {
         if (this.existsVertex(vertex))
             return false;
         while (!this.existsVertex(vertex))
-            this.adjacencyList.add(new ArrayList<int[]>());
+            this.adjacencyList.add(new ArrayList<>());
         return true;
     }
 
     /**
      * Add an edge with start vertex, end vertex and weight given, will not override
      * edge exist.
-     * 
-     * @param startVertex
-     * @param endVertex
-     * @param weight
+     *
+     * @param startVertex the index of the start vertex of the edge
+     * @param endVertex   the index of the end vertex of the edge
+     * @param weight      the weight of the edge
      */
     public void addEdge(int startVertex, int endVertex, int weight) {
         this.addVertex(startVertex);
         this.addVertex(endVertex);
-        this.adjacencyList.get(startVertex).add(new int[] { endVertex, weight });
+        this.adjacencyList.get(startVertex).add(new int[]{endVertex, weight});
     }
 
     /**
      * To get whether a vertex exists in the adjacency list or not.
-     * 
-     * @param vertex
+     *
+     * @param vertex the index of the vertex to be verified
      * @return If the vertex exists in the adjacency list, return true, else return
-     *         false
+     * false
      */
     public boolean existsVertex(int vertex) {
-        return this.adjacencyList.size() - 1 >= vertex;
+        return this.adjacencyList.size() > vertex;
     }
 
     public boolean isDirected() {
@@ -136,21 +144,28 @@ public class Graph {
     /**
      * Print each vertex in a line with other vertices and their weight in ascending
      * order according to vertices number.
-     * 
+     *
      * @return Each line prints the start vertex and other vertices numbers and
-     *         weights of edges ascending.
+     * weights of edges ascending.
      */
     public String printAdjacencyList() {
         String strList = "";
+        for (int i = 0; i < this.adjacencyList.size(); i++) {
+            strList += i + ":";
+            for (int[] edge : this.adjacencyList.get(i))
+                strList += "(" + i + "," + edge[0] + ":" + edge[1] + ")";
+            strList += "\n";
+            System.out.println(i);
+        }
         return strList;
     }
 
     /**
      * Print each weight in matrix with vertices number as row and col in ascending
      * order according to vertices number.
-     * 
+     *
      * @return Each row and each line print the vertex numbers and weights
-     *         ascending.
+     * ascending.
      */
     public String printAdjacencyMatrix() {
         String strMatrix = "";
@@ -159,10 +174,10 @@ public class Graph {
 
     /**
      * Print the shortest path from startVertex to other vertices, except itself.
-     * 
+     *
      * @param startVertex
      * @return [shortestPathLength]v1, v2, ..., vn. If no path from v1 to vn, print
-     *         [0]null
+     * [0]null
      */
     public String ShortestPath(int startVertex) {
         String strPath = "";

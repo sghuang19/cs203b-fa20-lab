@@ -1,52 +1,91 @@
 package assignment_4;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
 
+/**
+ * The graph stored as adjacencyList, which is a ArrayList of ArrayList of int
+ * array.
+ * 
+ * The index of the adjacencyList indicates the vertex, and each element of the
+ * adjacencyList is another ArrayList, each element of which is an int array,
+ * the first element in the array represents the endVertex, the second element
+ * represents the weight of the edge.
+ */
 public class Graph {
     private boolean isDirected;
-    private ArrayList<ArrayList<int[]>> adjacencyList;
+    private ArrayList<ArrayList<int[]>> adjacencyList = new ArrayList<ArrayList<int[]>>();
 
+    /**
+     * Empty constructor.
+     */
     public Graph() {
     }
 
+    /**
+     * Constructor with isDirected and adjacencyList given.
+     * 
+     * @param isDirected
+     * @param adjacencyList
+     */
     public Graph(boolean isDirected, ArrayList<ArrayList<int[]>> adjacencyList) {
+        this.isDirected = isDirected;
+        this.adjacencyList = adjacencyList;
+    }
 
+    /**
+     * Constructor with adjacencyList given only, isDirected is set to be default as
+     * true.
+     * 
+     * @param adjacencyList
+     */
     public Graph(ArrayList<ArrayList<int[]>> adjacencyList) {
         this.isDirected = true;
         this.adjacencyList = adjacencyList;
     }
 
-    public Graph(File file) throws IOException {
-        Scanner scanner = new Scanner(System.in);
-        BufferedReader bf = new BufferedReader(new FileReader(file));
+    /**
+     * Constructor with the file name of the graph file.
+     * 
+     * @param strFile the file name of the graph file
+     * @throws IOException
+     */
+    public Graph(String strFile) throws IOException {
+        this.readGraphFile(strFile);
+    }
+
+    /**
+     * Read graph file, this method will set the graph object to be the graph
+     * specified in the graph file, and returns the adjacency list.
+     * 
+     * @param strFile the file name of the graph file
+     * @return the adjacency list read
+     * @throws IOException
+     */
+    public ArrayList<ArrayList<int[]>> readGraphFile(String strFile) throws IOException {
+        BufferedReader bf = new BufferedReader(new FileReader(strFile));
         this.isDirected = Integer.parseInt(bf.readLine()) == 1;
 
         StringBuilder str = new StringBuilder();
         String textLine;
         while ((textLine = bf.readLine()) != null)
             str.append(textLine).append(" ");
-
-        String[] numbs = str.toString().split(" ");
-        this.adjacencyList = new int[numbs.length / 3][3];
-        System.out.println("The numbers array is:");
-        for (int i = 0; i < numbs.length; i++) {
-            for (int j = 0; j < numbs.length / 3; j++) {
-                adjacencyList[j][0] = Integer.parseInt(numbs[i++]);
-                adjacencyList[j][1] = Integer.parseInt(numbs[i++]);
-                adjacencyList[j][2] = Integer.parseInt(numbs[i++]);
-                System.out.println(Arrays.toString(adjacencyList[j]) + ", ");
-            }
-        }
-
-        // System.out.println("");
         bf.close();
-        // System.out.println("Original:" + Arrays.toString(this.adjacencyList));
-    }
+        String[] numbs = str.toString().split(" ");
 
-    public static ArrayList<ArrayList<int[]>> readGraphFile(String strFile) throws IOException {
+        // System.out.println("The numbers array is:");
+        // for (String string : numbs) {
+        // System.out.println(string);
+        // }
+
+        for (int i = 0; i < numbs.length / 3; i++) {
+            int startVertex = Integer.parseInt(numbs[i]);
+            int endVertex = Integer.parseInt(numbs[i + 1]);
+            int weight = Integer.parseInt(numbs[i + 2]);
+            this.addEdge(startVertex, endVertex, weight);
+        }
         return adjacencyList;
     }
 
@@ -58,7 +97,7 @@ public class Graph {
      * @return if the node already exists, return false, else return true
      */
     public boolean addVertex(int vertex) {
-        if (!this.existsVertex(vertex))
+        if (this.existsVertex(vertex))
             return false;
         while (!this.existsVertex(vertex))
             this.adjacencyList.add(new ArrayList<int[]>());

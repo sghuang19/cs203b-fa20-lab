@@ -37,7 +37,13 @@ public class Graph {
 
         // System.out.println("");
         bf.close();
-//        System.out.println("Original:" + Arrays.toString(this.adjTable));
+        // System.out.println("Original:" + Arrays.toString(this.adjacencyList));
+    }
+
+    public static ArrayList<int[][]> readGraphFile(String strFile) throws IOException {
+        return adjacencyList;
+    }
+
     }
 
     public boolean isDirected() {

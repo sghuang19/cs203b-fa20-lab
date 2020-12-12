@@ -79,4 +79,20 @@ public class Graph {
         return strMatrix;
     }
 
+    /**
+     * Print the shortest path from startVertex to other vertices, except itself.
+     * 
+     * @param startVertex
+     * @return [shortestPathLength]v1, v2, ..., vn. If no path from v1 to vn, print
+     *         [0]null
+     */
+    public String ShortestPath(int startVertex) {
+        String strPath = "";
+        return strPath;
+    }
+
+    public String ShortestPath(int startVertex, int endVertex) {
+        String strPath = "";
+        return strPath;
+    }
 }

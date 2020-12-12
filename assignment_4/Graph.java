@@ -6,11 +6,16 @@ import java.util.Scanner;
 
 public class Graph {
     private boolean isDirected;
-    private int[][] adjTable;
+    private ArrayList<int[][]> adjacencyList;
 
-    public Graph(boolean isDirected, int[][] adjTable) {
-        this.isDirected = isDirected;
-        this.adjTable = adjTable;
+    public Graph() {
+    }
+
+    public Graph(boolean isDirected, ArrayList<int[][]> adjacencyList) {
+
+    public Graph(ArrayList<int[][]> adjacencyList) {
+        this.isDirected = true;
+        this.adjacencyList = adjacencyList;
     }
 
     public Graph(File file) throws IOException {

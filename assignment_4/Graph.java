@@ -93,6 +93,9 @@ public class Graph {
         return adjacencyList;
     }
 
+    public boolean isDirected() {
+        return isDirected;
+    }
 
     /**
      * @return the adjacencyList of the graph
@@ -141,9 +144,6 @@ public class Graph {
         return this.adjacencyList.size() > vertex;
     }
 
-    public boolean isDirected() {
-        return isDirected;
-    }
 
     /**
      * Print each vertex in a line with other vertices and their weight in ascending

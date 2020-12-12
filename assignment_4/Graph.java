@@ -49,6 +49,21 @@ public class Graph {
         return adjacencyList;
     }
 
+    /**
+     * Extend the size of the adjacency list to the index of the vertex, equivalent
+     * with adding this node
+     * 
+     * @param vertex the index of the vertex
+     * @return if the node already exists, return false, else return true
+     */
+    public boolean addVertex(int vertex) {
+        if (!this.existsVertex(vertex))
+            return false;
+        while (!this.existsVertex(vertex))
+            this.adjacencyList.add(new ArrayList<int[]>());
+        return true;
+    }
+
     }
 
     public boolean isDirected() {

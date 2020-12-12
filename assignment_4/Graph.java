@@ -64,6 +64,20 @@ public class Graph {
         return true;
     }
 
+    /**
+     * Add an edge with start vertex, end vertex and weight given, will not override
+     * edge exist.
+     * 
+     * @param startVertex
+     * @param endVertex
+     * @param weight
+     */
+    public void addEdge(int startVertex, int endVertex, int weight) {
+        this.addVertex(startVertex);
+        this.addVertex(endVertex);
+        this.adjacencyList.get(startVertex).add(new int[] { endVertex, weight });
+    }
+
     }
 
     public boolean isDirected() {

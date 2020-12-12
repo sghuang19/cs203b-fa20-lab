@@ -10,7 +10,7 @@ public class GraphTest {
     @Test
     public void test01() throws IOException {
         Graph graph = new Graph();
-        graph.readGraphFile("src\\graph1.txt");
+        graph.readGraphFile("assignment_4\\graph1.txt");
         System.out.print(graph.printAdjacencyMatrix());
         assertEquals("0 0 0 0 0 0 0 0 \n" +
                 "0 0 0 0 0 0 0 0 \n" +
@@ -44,7 +44,7 @@ public class GraphTest {
     @Test
     public void test02() throws IOException {
         Graph graph = new Graph();
-        graph.readGraphFile("src\\graph2.txt");
+        graph.readGraphFile("assignment_4\\graph2.txt");
         System.out.print(graph.printAdjacencyMatrix());
         assertEquals("0 6 0 0 0 0 0 0 \n" +
                 "6 0 0 7 1 0 0 0 \n" +

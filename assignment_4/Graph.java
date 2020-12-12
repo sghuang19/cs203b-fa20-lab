@@ -180,7 +180,22 @@ public class Graph {
      * ascending.
      */
     public String printAdjacencyMatrix() {
+        int graphSize = this.size();
+        int[][] adjacencyMatrix = new int[graphSize][graphSize];
+        for (int[] is : adjacencyMatrix)
+            Arrays.fill(is, 0);
+
+        for (int i = 0; i < graphSize; i++) {
+            for (int[] is : this.adjacencyList.get(i))
+                adjacencyMatrix[is[0]][i] = is[1];
+        }
+
         String strMatrix = "";
+        for (int[] is : adjacencyMatrix) {
+            for (int i : is)
+                strMatrix += i + " ";
+            strMatrix += "\n";
+        }
         return strMatrix;
     }
 

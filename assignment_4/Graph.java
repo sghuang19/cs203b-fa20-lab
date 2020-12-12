@@ -105,6 +105,14 @@ public class Graph {
     }
 
     /**
+     * 
+     * @return the size of the graph
+     */
+    public int size() {
+        return this.adjacencyList.size();
+    }
+
+    /**
      * Extend the size of the adjacency list to the index of the vertex, equivalent
      * with adding this node
      *

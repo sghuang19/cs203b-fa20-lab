@@ -44,4 +44,8 @@ public class GraphTest {
                                 + "[8]1,3,7\n", graph.ShortestPath(1));
                 assertEquals("[10]1,4,6,5", graph.ShortestPath(1, 5));
         }
+
+        public static void main(String[] args) throws IOException {
+                Graph graph = new Graph("assignment_4\\graph1.txt");
+        }
 }

@@ -44,11 +44,28 @@ public class Graph {
         return isDirected;
     }
 
-    public int[][] getAdjTable() {
-        return adjTable;
+    /**
+     * Print each vertex in a line with other vertices and their weight in ascending
+     * order according to vertices number.
+     * 
+     * @return Each line prints the start vertex and other vertices numbers and
+     *         weights of edges ascending.
+     */
+    public String printAdjacencyList() {
+        String strList = "";
+        return strList;
     }
 
-//    public int[][] getAdjMatrix() {
-//        return
-//    }
+    /**
+     * Print each weight in matrix with vertices number as row and col in ascending
+     * order according to vertices number.
+     * 
+     * @return Each row and each line print the vertex numbers and weights
+     *         ascending.
+     */
+    public String printAdjacencyMatrix() {
+        String strMatrix = "";
+        return strMatrix;
+    }
+
 }

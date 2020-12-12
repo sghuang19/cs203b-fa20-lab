@@ -1,19 +1,20 @@
 package assignment_4;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Graph {
     private boolean isDirected;
-    private ArrayList<int[][]> adjacencyList;
+    private ArrayList<ArrayList<int[]>> adjacencyList;
 
     public Graph() {
     }
 
-    public Graph(boolean isDirected, ArrayList<int[][]> adjacencyList) {
+    public Graph(boolean isDirected, ArrayList<ArrayList<int[]>> adjacencyList) {
 
-    public Graph(ArrayList<int[][]> adjacencyList) {
+    public Graph(ArrayList<ArrayList<int[]>> adjacencyList) {
         this.isDirected = true;
         this.adjacencyList = adjacencyList;
     }
@@ -45,7 +46,7 @@ public class Graph {
         // System.out.println("Original:" + Arrays.toString(this.adjacencyList));
     }
 
-    public static ArrayList<int[][]> readGraphFile(String strFile) throws IOException {
+    public static ArrayList<ArrayList<int[]>> readGraphFile(String strFile) throws IOException {
         return adjacencyList;
     }
 

@@ -29,14 +29,14 @@ public class Graph {
             str.append(textLine).append(" ");
 
         String[] numbs = str.toString().split(" ");
-        this.adjTable = new int[numbs.length / 3][3];
+        this.adjacencyList = new int[numbs.length / 3][3];
         System.out.println("The numbers array is:");
         for (int i = 0; i < numbs.length; i++) {
             for (int j = 0; j < numbs.length / 3; j++) {
-                adjTable[j][0] = Integer.parseInt(numbs[i++]);
-                adjTable[j][1] = Integer.parseInt(numbs[i++]);
-                adjTable[j][2] = Integer.parseInt(numbs[i++]);
-                System.out.println(Arrays.toString(adjTable[j]) + ", ");
+                adjacencyList[j][0] = Integer.parseInt(numbs[i++]);
+                adjacencyList[j][1] = Integer.parseInt(numbs[i++]);
+                adjacencyList[j][2] = Integer.parseInt(numbs[i++]);
+                System.out.println(Arrays.toString(adjacencyList[j]) + ", ");
             }
         }
 

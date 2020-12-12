@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * The graph stored as adjacencyList, which is a ArrayList of ArrayList of int
@@ -81,14 +82,16 @@ public class Graph {
         // }
 
         for (int i = 0; i < numbs.length; i += 3) {
-//            System.out.println("=========");
-//            System.out.println(i);
+            // System.out.println("=========");
+            // System.out.println(i);
             int startVertex = Integer.parseInt(numbs[i]);
             int endVertex = Integer.parseInt(numbs[i + 1]);
             int weight = Integer.parseInt(numbs[i + 2]);
             this.addEdge(startVertex, endVertex, weight);
-//            System.out.println(i);
-//            System.out.println("=========");
+            // System.out.println(i);
+            // System.out.println("=========");
+            if (!isDirected)
+                this.addEdge(endVertex, startVertex, weight);
         }
         return adjacencyList;
     }
@@ -105,7 +108,6 @@ public class Graph {
     }
 
     /**
-     * 
      * @return the size of the graph
      */
     public int size() {
@@ -152,7 +154,6 @@ public class Graph {
         return this.adjacencyList.size() > vertex;
     }
 
-
     /**
      * Print each vertex in a line with other vertices and their weight in ascending
      * order according to vertices number.
@@ -167,7 +168,7 @@ public class Graph {
             for (int[] edge : this.adjacencyList.get(i))
                 strList += "(" + i + "," + edge[0] + ":" + edge[1] + ")";
             strList += "\n";
-            System.out.println(i);
+            // System.out.println(i);
         }
         return strList;
     }

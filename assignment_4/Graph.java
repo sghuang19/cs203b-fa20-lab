@@ -27,8 +27,8 @@ public class Graph {
     /**
      * Constructor with isDirected and adjacencyList given.
      *
-     * @param isDirected
-     * @param adjacencyList
+     * @param isDirected    true for directed graph, false for undirected
+     * @param adjacencyList the adjacency list of the graph
      */
     public Graph(boolean isDirected, ArrayList<ArrayList<int[]>> adjacencyList) {
         this.isDirected = isDirected;
@@ -39,7 +39,7 @@ public class Graph {
      * Constructor with adjacencyList given only, isDirected is set to be default as
      * true.
      *
-     * @param adjacencyList
+     * @param adjacencyList the adjacency list of the graph
      */
     public Graph(ArrayList<ArrayList<int[]>> adjacencyList) {
         this.isDirected = true;
@@ -50,7 +50,7 @@ public class Graph {
      * Constructor with the file name of the graph file.
      *
      * @param strFile the file name of the graph file
-     * @throws IOException
+     * @throws IOException IOException
      */
     public Graph(String strFile) throws IOException {
         this.readGraphFile(strFile);
@@ -93,6 +93,10 @@ public class Graph {
         return adjacencyList;
     }
 
+
+    /**
+     * @return the adjacencyList of the graph
+     */
     public ArrayList<ArrayList<int[]>> getAdjacencyList() {
         return adjacencyList;
     }
@@ -175,7 +179,7 @@ public class Graph {
     /**
      * Print the shortest path from startVertex to other vertices, except itself.
      *
-     * @param startVertex
+     * @param startVertex the start vertex of the path
      * @return [shortestPathLength]v1, v2, ..., vn. If no path from v1 to vn, print
      * [0]null
      */
@@ -184,6 +188,14 @@ public class Graph {
         return strPath;
     }
 
+    /**
+     * Print the shortest path from startVertex to the endVertex, except itself.
+     *
+     * @param startVertex the start vertex of the path
+     * @param endVertex   the end vertex of the path
+     * @return [shortestPathLength]v1, v2, ..., vn. If no path from v1 to vn, print
+     * [0]null
+     */
     public String ShortestPath(int startVertex, int endVertex) {
         String strPath = "";
         return strPath;

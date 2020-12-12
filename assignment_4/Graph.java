@@ -78,6 +78,15 @@ public class Graph {
         this.adjacencyList.get(startVertex).add(new int[] { endVertex, weight });
     }
 
+    /**
+     * To get whether a vertex exists in the adjacency list or not.
+     * 
+     * @param vertex
+     * @return If the vertex exists in the adjacency list, return true, else return
+     *         false
+     */
+    public boolean existsVertex(int vertex) {
+        return this.adjacencyList.size() - 1 >= vertex;
     }
 
     public boolean isDirected() {

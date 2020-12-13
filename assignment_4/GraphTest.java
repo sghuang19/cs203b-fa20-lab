@@ -74,6 +74,34 @@ public class GraphTest {
         assertEquals("[10]1,4,6,5", graph.ShortestPath(1, 5));
     }
 
+    @Test
+    public void test03() throws IOException {
+        Graph graph = new Graph();
+        graph.readGraphFile("assignment_4\\numbs.txt");
+        System.out.print(graph.printAdjacencyMatrix());
+        assertEquals("0 0 0 0 0 \n" +
+                "4 0 0 0 0 \n" +
+                "6 1 0 0 0 \n" +
+                "0 0 0 0 0 \n" +
+                "0 0 0 1 0 \n", graph.printAdjacencyMatrix());
+        System.out.print(graph.printAdjacencyList());
+        assertEquals("0:(0,1:4)(0,2:6)\n" +
+                "1:(1,2:1)\n" +
+                "2:\n" +
+                "3:(3,4:1)\n" +
+                "4:\n", graph.printAdjacencyList());
+        graph.printAdjacencyMatrix();
+        assertEquals("[4]0,1\n" +
+                "[5]0,1,2\n" +
+                "[0]null\n" +
+                "[0]null\n", graph.ShortestPath(0));
+        assertEquals("[5]0,1,2", graph.ShortestPath(0, 2));
+        assertEquals("[0]null\n" +
+                "[0]null\n" +
+                "[0]null\n" +
+                "[1]3,4\n", graph.ShortestPath(3));
+    }
+
     public static void main(String[] args) throws IOException {
         Graph graph = new Graph("assignment_4\\graph2.txt");
         System.out.println(graph.ShortestPath(1));

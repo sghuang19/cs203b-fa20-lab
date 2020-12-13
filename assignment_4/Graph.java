@@ -276,7 +276,8 @@ public class Graph {
      * [0]null
      */
     public String ShortestPath(int startVertex, int endVertex) {
-        String strPath = "";
-        return strPath;
+        String[] path = ShortestPath(startVertex).split("\n");
+        int i = endVertex > startVertex ? endVertex - 1 : endVertex;
+        return path[i];
     }
 }

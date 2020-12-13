@@ -8,11 +8,10 @@ import java.util.Arrays;
 
 /**
  * The graph stored as adjacencyList, which is a ArrayList of ArrayList of int
- * array.
- * The index of the adjacencyList indicates the vertex, and each element of the
- * adjacencyList is another ArrayList, each element of which is an int array,
- * the first element in the array represents the endVertex, the second element
- * represents the weight of the edge.
+ * array. The index of the adjacencyList indicates the vertex, and each element
+ * of the adjacencyList is another ArrayList, each element of which is an int
+ * array, the first element in the array represents the endVertex, the second
+ * element represents the weight of the edge.
  */
 public class Graph {
     private boolean isDirected;
@@ -139,7 +138,7 @@ public class Graph {
     public void addEdge(int startVertex, int endVertex, int weight) {
         this.addVertex(startVertex);
         this.addVertex(endVertex);
-        this.adjacencyList.get(startVertex).add(new int[]{endVertex, weight});
+        this.adjacencyList.get(startVertex).add(new int[] { endVertex, weight });
     }
 
     /**
@@ -147,7 +146,7 @@ public class Graph {
      *
      * @param vertex the index of the vertex to be verified
      * @return If the vertex exists in the adjacency list, return true, else return
-     * false
+     *         false
      */
     public boolean existsVertex(int vertex) {
         return this.adjacencyList.size() > vertex;
@@ -158,7 +157,7 @@ public class Graph {
      * order according to vertices number.
      *
      * @return Each line prints the start vertex and other vertices numbers and
-     * weights of edges ascending.
+     *         weights of edges ascending.
      */
     public String printAdjacencyList() {
         StringBuilder strList = new StringBuilder();
@@ -177,7 +176,7 @@ public class Graph {
      * order according to vertices number.
      *
      * @return Each row and each line print the vertex numbers and weights
-     * ascending.
+     *         ascending.
      */
     public String printAdjacencyMatrix() {
         int graphSize = this.size();
@@ -204,7 +203,7 @@ public class Graph {
      *
      * @param startVertex the start vertex of the path
      * @return [shortestPathLength]v1, v2, ..., vn. If no path from v1 to vn, print
-     * [0]null
+     *         [0]null
      */
     @SuppressWarnings("unchecked")
     public String ShortestPath(int startVertex) {
@@ -229,7 +228,8 @@ public class Graph {
                     k = j;
                 }
             }
-            if (min == Integer.MAX_VALUE) break;
+            if (min == Integer.MAX_VALUE)
+                break;
 
             relaxed[k] = true;
             for (int[] is : this.adjacencyList.get(k)) {
@@ -247,10 +247,10 @@ public class Graph {
         for (int i = 0; i < size; i++)
             distance[i] = distance[i] == Integer.MAX_VALUE ? 0 : distance[i];
 
-
         StringBuilder strPath = new StringBuilder();
         for (int i = 0; i < size; i++) {
-            if (i == startVertex) continue;
+            if (i == startVertex)
+                continue;
             strPath.append("[").append(distance[i]).append("]");
             if (distance[i] == 0) {
                 strPath.append("null\n");
@@ -273,7 +273,7 @@ public class Graph {
      * @param startVertex the start vertex of the path
      * @param endVertex   the end vertex of the path
      * @return [shortestPathLength]v1, v2, ..., vn. If no path from v1 to vn, print
-     * [0]null
+     *         [0]null
      */
     public String ShortestPath(int startVertex, int endVertex) {
         String[] path = ShortestPath(startVertex).split("\n");

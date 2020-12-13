@@ -229,6 +229,7 @@ public class Graph {
                     k = j;
                 }
             }
+            if (min == Integer.MAX_VALUE) break;
 
             relaxed[k] = true;
             for (int[] is : this.adjacencyList.get(k)) {
@@ -243,9 +244,9 @@ public class Graph {
             }
         }
 
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++)
             distance[i] = distance[i] == Integer.MAX_VALUE ? 0 : distance[i];
-        }
+
 
         StringBuilder strPath = new StringBuilder();
         for (int i = 0; i < size; i++) {

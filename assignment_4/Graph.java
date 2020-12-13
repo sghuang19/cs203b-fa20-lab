@@ -207,9 +207,64 @@ public class Graph {
      * @return [shortestPathLength]v1, v2, ..., vn. If no path from v1 to vn, print
      * [0]null
      */
+    @SuppressWarnings("unchecked")
     public String ShortestPath(int startVertex) {
-        String strPath = "";
-        return strPath;
+        int size = this.size();
+        ArrayList<Integer>[] path = new ArrayList[size];
+
+        boolean[] relaxed = new boolean[size];
+        relaxed[startVertex] = true;
+
+        int[] distance = new int[size];
+        Arrays.fill(distance, Integer.MAX_VALUE);
+        distance[startVertex] = 0;
+        for (int[] is : this.adjacencyList.get(startVertex))
+            distance[is[0]] = is[1];
+
+        for (int i = 0; i < size - 1; i++) {
+            int min = Integer.MAX_VALUE;
+            int k = 0;
+            for (int j = 0; j < size; j++) {
+                if (!relaxed[j] && distance[j] < min) {
+                    min = distance[j];
+                    k = j;
+                }
+            }
+
+            relaxed[k] = true;
+            for (int[] is : this.adjacencyList.get(k)) {
+                if (distance[is[0]] > min + is[1]) {
+                    distance[is[0]] = min + is[1];
+                    ArrayList<Integer> temp = new ArrayList<>();
+                    if (path[k] != null)
+                        temp.addAll(path[k]);
+                    temp.add(k);
+                    path[is[0]] = temp;
+                }
+            }
+        }
+
+        for (int i = 0; i < size; i++) {
+            distance[i] = distance[i] == Integer.MAX_VALUE ? 0 : distance[i];
+        }
+
+        StringBuilder strPath = new StringBuilder();
+        for (int i = 0; i < size; i++) {
+            if (i == startVertex) continue;
+            strPath.append("[").append(distance[i]).append("]");
+            if (distance[i] == 0) {
+                strPath.append("null\n");
+                continue;
+            }
+            strPath.append(startVertex).append(",");
+            if (path[i] != null) {
+                for (int j : path[i])
+                    strPath.append(j).append(",");
+            }
+            strPath.append(i).append("\n");
+        }
+
+        return strPath.toString();
     }
 
     /**

@@ -9,7 +9,6 @@ import java.util.Arrays;
 /**
  * The graph stored as adjacencyList, which is a ArrayList of ArrayList of int
  * array.
- * <p>
  * The index of the adjacencyList indicates the vertex, and each element of the
  * adjacencyList is another ArrayList, each element of which is an int array,
  * the first element in the array represents the endVertex, the second element
@@ -17,7 +16,7 @@ import java.util.Arrays;
  */
 public class Graph {
     private boolean isDirected;
-    private ArrayList<ArrayList<int[]>> adjacencyList = new ArrayList<ArrayList<int[]>>();
+    private ArrayList<ArrayList<int[]>> adjacencyList = new ArrayList<>();
 
     /**
      * Empty constructor.
@@ -162,15 +161,15 @@ public class Graph {
      * weights of edges ascending.
      */
     public String printAdjacencyList() {
-        String strList = "";
+        StringBuilder strList = new StringBuilder();
         for (int i = 0; i < this.adjacencyList.size(); i++) {
-            strList += i + ":";
+            strList.append(i).append(":");
             for (int[] edge : this.adjacencyList.get(i))
-                strList += "(" + i + "," + edge[0] + ":" + edge[1] + ")";
-            strList += "\n";
+                strList.append("(").append(i).append(",").append(edge[0]).append(":").append(edge[1]).append(")");
+            strList.append("\n");
             // System.out.println(i);
         }
-        return strList;
+        return strList.toString();
     }
 
     /**
@@ -191,13 +190,13 @@ public class Graph {
                 adjacencyMatrix[is[0]][i] = is[1];
         }
 
-        String strMatrix = "";
+        StringBuilder strMatrix = new StringBuilder();
         for (int[] is : adjacencyMatrix) {
             for (int i : is)
-                strMatrix += i + " ";
-            strMatrix += "\n";
+                strMatrix.append(i).append(" ");
+            strMatrix.append("\n");
         }
-        return strMatrix;
+        return strMatrix.toString();
     }
 
     /**
